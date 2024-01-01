@@ -1,5 +1,7 @@
 const apiKey = "4c88410125f733a80d6c276a51f07d85";
-const baseURL = "https://api.openweathermap.org/data/2.5/weather?q=kolkata&appid=4c88410125f733a80d6c276a51f07d85&units=metric";
+const baseURL = "https://api.openweathermap.org/data/2.5/weather?q=&appid=&units=metric";
+const apiKey1 = "6123737111384d4c9f42b9f4ed9eda96";
+const baseURL1 = "https://api.weatherbit.io/v2.0/forecast/daily?city=&key=";
 
 const cityName = document.querySelector(".enterCity");
 const search = document.querySelector(".search-btn");
@@ -8,8 +10,10 @@ const nowCity = document.querySelector(".currCity");
 const wind = document.querySelector(".currSpeed");
 const humid = document.querySelector(".currHumid");
 const nowIcon = document.querySelector(".weather-icon");
-
-let city;
+const days = document.querySelectorAll(".day");
+const temps = document.querySelectorAll(".dayTemp");
+const nextIcons = document.querySelectorAll(".nxtWeatherCards img");
+const des = document.querySelectorAll(".description");
 
 async function weatherData(city){
     const URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -24,7 +28,8 @@ async function weatherData(city){
     humid.innerText = data.main.humidity + "%";
 
     const changeIcon = () => {
-        if(data.weather[0].main == "Fog"){
+        
+        if(data.weather[0].main == "Fog" || data.weather[0].main == "Mist"){
             nowIcon.src = "./images/mist.png";
         }else if(data.weather[0].main == "Clear"){
             nowIcon.src = "./images/clear.png";
@@ -36,14 +41,50 @@ async function weatherData(city){
             nowIcon.src = "./images/drizzle.png";
         }else if(data.weather[0].main == "Snow"){
             nowIcon.src = "./images/snow.png";
+        }else if(data.weather[0].main == "Smoke"){
+            nowIcon.src = "./images/smoke.png";
         }
     }
 
+    changeIcon();
 }
+
+
+async function nextWeather(city){
+    const URL1 = `https://api.weatherbit.io/v2.0/forecast/daily?city=${city}&key=${apiKey1}`;
+    const response = await fetch(URL1);
+    var data1 = await response.json();
+    console.log(data1);
+     
+    for(let i = 0 ; i < 6 ; i++){
+        days[i].innerText = data1.data[i].datetime;
+        temps[i].innerText = data1.data[i].temp + "°C";
+        des[i].innerText = data1.data[i].weather.description;
+
+        if(data1.data[i].weather.description == "Fog" || data1.data[i].weather.description == "Mist"){
+            nextIcons[i].src = "./images/mist.png";
+        }else if(data1.data[i].weather.description == "Clear Sky"){
+            nextIcons[i].src = "./images/clear.png";
+        }else if(data1.data[i].weather.description == "Rain"){
+            nextIcons[i].src = "./images/rain.png";
+        }else if(data1.data[i].weather.description == "Few clouds" || data1.data[i].weather.description == "Scattered clouds"){
+            nextIcons[i].src = "./images/clouds.png";
+        }else if(data1.data[i].weather.description == "Drizzle"){
+            nextIcons[i].src = "./images/drizzle.png";
+        }else if(data1.data[i].weather.description == "Snow"){
+            nextIcons[i].src = "./images/snow.png";
+        }else if(data1.data[i].weather.description == "Broken clouds"){
+            nextIcons[i].src = "./images/broken_cloud.png";
+        }
+    }
+}
+
+
 search.addEventListener("click" , () => {
     console.log("Clicked");
     city = cityName.value;
     weatherData(city);
+    nextWeather(city);
 })
 
 

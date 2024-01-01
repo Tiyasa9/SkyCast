@@ -33,28 +33,33 @@
 }
 
 .currWeather-card{
-    height: 75vmin;
+    height: 70vmin;
     width: 50vmin;
     background-color:rgba(56, 56, 56, 0.628);
     border-radius: 3vmin;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    margin-top: 0;
 }
 
 .temp{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 0;
 }
 
 .currTemp{
-    font-size: large;
+    font-size: x-large;
     font-weight: bold;
 }
 
 .currCity{
-    margin: 5vmin;
+    margin:1vmin 5vmin 5vmin 5vmin;
+    text-align: center;
 }
 
 .windSpeed{
@@ -123,4 +128,16 @@ body{
 }
 .heading{
     margin: 3vmin;
+}
+.weather-icon{
+    height: 30vmin;
+    width: 30vmin;
+
+}
+
+.dayTemp{
+    font-weight: bold ;
+}
+.day{
+    text-decoration: underline;
 }
