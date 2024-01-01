@@ -12,7 +12,7 @@
     border: none;
 
 }
-form img{
+.searchBar img{
     width: 4vmin;
     height: 4vmin;
     border: none;
@@ -25,7 +25,7 @@ form img{
 
 }
 
-form{
+.searchBar{
     display: flex;
     align-items: center;
     gap: 2vmin;
