@@ -22,7 +22,7 @@
     border: none;
     outline: 0;
     cursor: pointer;
-
+    background-color: white;
 }
 
 .searchBar{
@@ -120,12 +120,6 @@
     align-items: center;
     gap: 6vmin;
 }
-
-body{
-    background-image: url(./winter.jpg);
-    background-size: cover;
-    color: white;
-}
 .heading{
     margin: 3vmin;
 }
@@ -140,4 +134,26 @@ body{
 }
 .day{
     text-decoration: underline;
+}
+
+body{
+    background-image: url(./images/winter.jpg);
+    background-size: cover;
+    color: white;
+}
+
+.top{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 3vmin;
+}
+
+button {
+    background-color: rgba(52, 53, 65, 0.794);
+    border: none;
+    border-radius: 20px;
+    text-align: center;
+    font-size: x-large;
+    cursor: pointer;
 }

@@ -14,6 +14,8 @@ const days = document.querySelectorAll(".day");
 const temps = document.querySelectorAll(".dayTemp");
 const nextIcons = document.querySelectorAll(".nxtWeatherCards img");
 const des = document.querySelectorAll(".description");
+const bgImg = document.querySelector("body");
+const btn = document.querySelector("button");
 
 async function weatherData(city){
     const URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -79,7 +81,6 @@ async function nextWeather(city){
     }
 }
 
-
 search.addEventListener("click" , () => {
     console.log("Clicked");
     city = cityName.value;
@@ -87,4 +88,40 @@ search.addEventListener("click" , () => {
     nextWeather(city);
 })
 
+let currentSeason = 1;
+
+function updateBackground(currentSeason) {
+
+    switch (currentSeason) {
+        case 1:
+            bgImg.style.backgroundImage = 'url("./images/winter.jpg")';
+            btn.innerText = "❄️";
+            break;
+        case 2:
+            bgImg.style.backgroundImage = 'url("./images/spring.jpg")';
+            btn.innerText = "🌸";
+            break;
+        case 3:
+            bgImg.style.backgroundImage = 'url("./images/summer.jpg")';
+            btn.innerText = "☀️";
+            break;
+        case 4:
+            bgImg.style.backgroundImage = 'url("./images/monsoon.jpg")';
+            btn.innerText = "☔";
+            break;
+        case 5:
+            bgImg.style.backgroundImage = 'url("./images/autumn.jpg")';
+            btn.innerText = "🍂";
+            break;
+        default:
+            break;
+    }
+}
+
+btn.addEventListener("click" , () => {
+    console.log("Mode btn is clicked")
+        currentSeason = (currentSeason % 5) + 1;
+        updateBackground(currentSeason);
+    }
+);
 
